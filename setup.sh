@@ -94,6 +94,9 @@ if [ "$LAST_SYMBOL" = "/" ]; then
   CONFIG_PATH="${CONFIG_PATH%?}"
 fi
 
+# grap version of packages
+export $(grep -v '^#' scripts/packages.env | xargs)
+
 # save current path to return later
 CURRENT_PATH=$(pwd)
 
