@@ -237,4 +237,5 @@ else
 fi
 
 # at the end save Z2Mpath to env file for use in the update script
+echo "" >> .env
 echo "Z2MPATH=$Z2MPATH" >> .env
