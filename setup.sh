@@ -235,3 +235,6 @@ else
     echo "start docker without zigbee2mqtt"
     docker compose up -d
 fi
+
+# at the end save Z2Mpath to env file for use in the update script
+echo "Z2MPATH=$Z2MPATH" >> .env

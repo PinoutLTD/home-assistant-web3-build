@@ -59,7 +59,7 @@ services:
 
   homeassistant:
     container_name: homeassistant
-    image: "ghcr.io/home-assistant/home-assistant:${HA_VERSION}"
+    image: ghcr.io/home-assistant/home-assistant:${HA_VERSION}
     restart: unless-stopped
     volumes:
       - ${CONFIG_PATH}/homeassistant:/config

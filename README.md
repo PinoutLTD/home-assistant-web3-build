@@ -10,7 +10,7 @@ Docker engine + docker compose.
 
 Install additional packages:
 ```commandline
-sudo apt-get install wget unzip git
+sudo apt-get install wget unzip git jq
 ```
 
 **Insert zigbee coordinator in your PC before start script!** 
@@ -43,11 +43,17 @@ bash setup.sh
 
 After everything started, Home Assistant web interface will be on 8123 port and zigbee2mqtt on 8099 port.
 
+
+It will stop and delete running docker containers.
+
+## Update 
+
+To update version of packages, run `update.sh` script. It will stop running containers, dowload new version of packages and start everything again. This script will save all configurations files.
+
+
 ## Stop
 
-To stop everything use next command:
+To stop everything run stop script:
 ```commandline
-docker compose --profile z2m down
+bash stop.sh
 ```
-
-After that you delete all config directories. **This will cause you to lose all settings. You will need root accesses**
