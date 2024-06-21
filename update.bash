@@ -30,6 +30,7 @@ git pull
 
 # grap variables from .env file excluding comments
 export $(grep -v '^#' .env | xargs)
+export Z2MPATH
 
 # Check the last symbol in path. if it is "/", then delete it.
 LAST_SYMBOL=${CONFIG_PATH: -1}
@@ -66,7 +67,9 @@ fi
 
 ROBO_CUR_VER="$(jq -r '.version' homeassistant/custom_components/robonomics/manifest.json)"
 
-if [ "$ROBO_CUR_VER" = "$ROBONOMICS_VERSION" ]; then
+echo "Robonomics cur version - $ROBO_CUR_VER"
+
+if [ "$ROBO_CUR_VER" != "$ROBONOMICS_VERSION" ]; then
     echo "robonomics version is out of date. Updating it"
     rm -r homeassistant/custom_components/robonomics
     #download robonomics integration and unpack it
@@ -101,20 +104,20 @@ else
     docker image rm koenkk/zigbee2mqtt:${Z2M_CUR_VER}
 fi
 
-if [ "$IPFS_CUR_VER" = "$IPFS_VERSION" ]; then
+if [ "$IPFS_CUR_VER" = "v${IPFS_VERSION}" ]; then
     echo "IPFS image uptodate"
 
 else
     echo "Delete old IPFS image"
-    docker image rm ipfs/kubo:v${IPFS_CUR_VER}
+    docker image rm ipfs/kubo:${IPFS_CUR_VER}
 fi
 
-if [ "$LIBP2P_CUR_VER" = "$LIBP2P_VERSION" ]; then
+if [ "$LIBP2P_CUR_VER" = "v.${LIBP2P_VERSION}" ]; then
     echo "LIBP2P image uptodate"
 
 else
     echo "Delete old LIBP2P image"
-    docker image rm ghcr.io/pinoutltd/libp2p-ws-proxy:v.${LIBP2P_CUR_VER}
+    docker image rm ghcr.io/pinoutltd/libp2p-ws-proxy:${LIBP2P_CUR_VER}
 fi
 
 if [ "$HA_CUR_VER" = "$HA_VERSION" ]; then
