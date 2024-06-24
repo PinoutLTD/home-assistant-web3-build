@@ -44,10 +44,7 @@ export $(grep -v '^#' scripts/packages.env | xargs)
 
 # download new docker images
 
-docker image pull koenkk/zigbee2mqtt:${Z2M_VERSION}
-docker image pull ipfs/kubo:v${IPFS_VERSION}
-docker image pull ghcr.io/pinoutltd/libp2p-ws-proxy:v.${LIBP2P_VERSION}
-docker image pull ghcr.io/home-assistant/home-assistant:${HA_VERSION}
+docker compose --profile z2m pull
 
 # save current path to return later
 CURRENT_PATH=$(pwd)
