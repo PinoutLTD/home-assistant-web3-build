@@ -13,7 +13,7 @@ if [ -d /dev/serial/by-id/ ]; then
     NUMB=$(ls -1q /dev/serial/by-id/ | wc -l)
 
     if (($NUMB > 1)); then
-      echo "You have more that 1 connected devices. Please choose one"
+      echo "You have more than 1 connected device, which seems to be a Zigbee coordinator. Please choose one:"
       select f in /dev/serial/by-id/*; do
         test -n "$f" && break
         echo ">>> Invalid Selection"
@@ -29,9 +29,9 @@ if [ -d /dev/serial/by-id/ ]; then
     echo "Cannot find zigbee coordinator location. Please insert it and run script again."
     echo "Do you want to continue without zigbee coordinator? It will not start Zigbee2MQTT container."
     while true; do
-        read -p "Do you want to proceed? (y/n) " yn
+        read -p "Do you want to proceed? (Y/n) " yn
         case $yn in
-	          [yY] ) echo ok, we will proceed;
+	          [yY]| "" ) echo ok, we will proceed;
 	            Z2MENABLE=false
 		          break;;
 	          [nN] ) echo exiting...;
@@ -45,9 +45,9 @@ else
     echo "Cannot find zigbee coordinator location. Please insert it and run script again. The directory "/dev/serial/by-id/" does not exist"
     echo "Do you want to continue without zigbee coordinator? It will not start Zigbee2MQTT container."
     while true; do
-        read -p "Do you want to proceed? (y/n) " yn
+        read -p "Do you want to proceed? (Y/n) " yn
         case $yn in
-	          [yY] ) echo ok, we will proceed;
+	          [yY]| "" ) echo ok, we will proceed;
 	            Z2MENABLE=false
 		          break;;
 	          [nN] ) echo exiting...;
